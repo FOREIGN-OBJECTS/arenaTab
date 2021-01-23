@@ -1,6 +1,12 @@
-function polling() {
-  console.log("polling");
-  setTimeout(polling, 1000 * 30);
-}
+// listen for messages from newtab.ts
 
-polling();
+chrome.runtime.onMessage.addListener((msg, sender, response) => {
+  if (msg.name = "fetchImage") {
+    // call API
+    // wait for response
+
+
+    // send to newtab.ts
+    response({imageURL: "random"})
+  }
+})
