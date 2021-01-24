@@ -39,5 +39,5 @@ const handleToggle = (e: Event) => {
   e.preventDefault()
   isDark = !isDark
   document.bgColor = isDark ? '#000' : '#fff'
-  document.getElementById('toggle').style.color = !isDark ? '#000' : '#fff'
+  document.getElementById('settings').style.filter = !isDark ? 'invert(0)' : 'invert(1)'
 }

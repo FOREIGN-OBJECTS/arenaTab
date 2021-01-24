@@ -1,9 +1,14 @@
+body {
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', sans-serif;
+}
+
 .wrapper {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   width: 60vw;
-  margin: 10vh auto;
+  margin: 8vh auto;
 }
 
 .image {
@@ -11,5 +16,25 @@
   height: 75vh;
   background-repeat: no-repeat;
   background-position: center;
-  margin: 0 10px;
+}
+
+#settings {
+  width: 85vw;
+  margin: 5vh auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+#settings > * {
+  margin: 3px 0;
+}
+
+#input {
+  font-size: 10px;
+  font-family: 'IBM Plex Mono', sans-serif;
+}
+
+.credits > a {
+  color: inherit;
 }
