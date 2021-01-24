@@ -1,4 +1,8 @@
-let darkMode = false
+let darkMode
+chrome.runtime.sendMessage({ name: "load"}, (response) => {
+  darkMode = JSON.parse(response.darkMode)
+  setBg(darkMode)
+})
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   // fallback image
@@ -7,9 +11,6 @@ chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   // process response array
   const randomIndex = contents ? Math.floor(Math.random() * contents.length) : 0
   const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.large.url : fallbackURL
-
-  // background
-  document.onload = () => setBg(darkMode)
 
   // Images
   document.getElementById('image1').style.backgroundImage = `url(${imageURL})`
