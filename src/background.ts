@@ -1,13 +1,13 @@
 
 // listen for messages from newtab.ts
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
+  // handle dark mode
   if (msg.name === "load") {
     const darkMode = getFromLocalStorage('darkMode')
     response({ darkMode })
   }
 
   if (msg.name === "fetchImage") {
-
     // get channel from localStorage, if it exists
     const channel = getFromLocalStorage('input')
     // retrieve image from channel using API
@@ -41,7 +41,7 @@ const fetchFromAPI = async (channel: string) => {
 const getFromLocalStorage = (id: string) => {
   try {
     const value = localStorage.getItem(id)
-    console.log('retrieved', value, 'from localStorage')
+    console.log(`retrieved ${id}:${value}`)
     return JSON.parse(value)
   } catch(e) {
     console.log('failed getting', e)

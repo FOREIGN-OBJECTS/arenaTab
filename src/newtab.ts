@@ -32,13 +32,21 @@ const handleChange = (e: Event) => {
   const input = document.getElementById('input') as HTMLInputElement
   const value = input.value
   saveToLocalStorage(value, 'input')
+  reloadTab()
+}
+
+const reloadTab = () => {
+  chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+    chrome.tabs.reload(tabs[0].id)
+    console.log('reload')
+  })
 }
 
 const saveToLocalStorage = (value: string, id: string) => {
   try {
     const valueStr = JSON.stringify(value)
     localStorage.setItem(id, valueStr)
-    console.log('saved', value, 'to localStorage')
+    console.log(`saved ${id}:${value}`)
   }
   catch(e) {
     console.log('failed saving', e)

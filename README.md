@@ -7,11 +7,7 @@ A Chrome plugin that uses imagery from an [are.na](https://www.are.na/) channel 
 * dark mode 🌝🌚
 * persist channel name and dark mode between sessions
 * based on [are.na API documentation](https://dev.are.na/documentation/channels)
-* cloned from [this repo](https://github.com/chibat/chrome-extension-typescript-starter)
-* `src/`: TypeScript source files
-* `dist`: Chrome Extension directory
-* `dist/js`: Generated JavaScript files
+* currently only supports public channels 📌
 
 ## Setup
-
-`npm install` to run locally. To build and test locally, run `npm run build` and then load the `dist/` directory via "Load unpacked" on `chrome://extensions/`.
+`npm install` to run locally and `npm run watch` to watch. To build for loading into Chrome, `npm run build` and then load the `dist/` directory via "Load unpacked" on `chrome://extensions/`.
