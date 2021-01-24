@@ -5,14 +5,10 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     // get channel from localStorage, if it exists
     const channel = getFromLocalStorage()
     // retrieve image from channel using API
-    fetchFromAPI(channel).then( (contents) => {
-      const imageURL = contents[0].image.large.url
-      // send to newtab.ts for display
-      console.log(imageURL)
-      response({ imageURL })
-      return true
-      }
-    )
+    fetchFromAPI(channel)
+    // send to newtab.ts for display
+    .then(response)
+    return true
   }
 })
 
