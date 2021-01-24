@@ -2,11 +2,11 @@ let isDark = false
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   // fallback image
-  const fallbackURL = !contents || contents.length === 0 ? 'https://d2w9rnfcy7mm78.cloudfront.net/3129866/original_deee6347ec61922e66b618f8b8d1c77a.jpg?1543681222?bc=1' : ''
+  const fallbackURL = !contents || contents.length === 0 ? 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1' : ''
 
   // process response array
   const randomIndex = contents ? Math.floor(Math.random() * contents.length) : 0
-  const imageURL = contents ? contents[randomIndex].image.original.url : fallbackURL
+  const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.original.url : fallbackURL
 
   // Images
   document.getElementById('image1').style.backgroundImage = `url(${imageURL})`
