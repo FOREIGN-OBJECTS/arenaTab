@@ -1,7 +1,9 @@
 # are.na new tab Chrome extension
 
-Uses imagery from an [https://www.are.na/](are.na channel) in a new tab.
+Uses imagery from an [https://www.are.na/](are.na) channel in a new tab.
 Cloned from [this repo](https://github.com/chibat/chrome-extension-typescript-starter)
+
+ ![screenshot](screenshot.png)
 
 ## Project Structure
 
