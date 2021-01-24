@@ -13,11 +13,18 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
 })
 
 const fetchFromAPI = async (channel: string) => {
-  const arenaURL = `http://api.are.na/v2/channels/${channel}/contents`
+  const arenaURL = `http://api.are.na/v2/channels/${channel}/`
   try {
-    let response = await fetch(arenaURL)
-    let { contents } = await response.json()
+    const lengthResponse = await fetch(arenaURL)
+    const { length } = await lengthResponse.json()
+
+    const lastPage = Math.floor(length / 25) // every page has 25 items
+    const numOfItems = 25
+
+    const contentResponse  = await fetch(`${arenaURL}/contents?page=${lastPage}&amp;per=${numOfItems}`)
+    let { contents } = await contentResponse.json()
     return contents
+
    } catch (error) {
      console.log(error);
    }
