@@ -1,4 +1,15 @@
-body {
-  font-size: 24px;
-  font-family: 'IBM Plex Mono', sans-serif;
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 60vw;
+  margin: 10vh auto;
+}
+
+.image {
+  width: 15vw;
+  height: 75vh;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0 10px;
 }
