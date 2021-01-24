@@ -1,10 +1,11 @@
 let isDark = false
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (response) => {
-  // wait for response from API
+  // process response array
   const fallbackURL = 'https://d2w9rnfcy7mm78.cloudfront.net/3129866/original_deee6347ec61922e66b618f8b8d1c77a.jpg?1543681222?bc=1'
+  const randomIndex = response ? Math.floor(Math.random() * response.length) : 0
+  const imageURL = response ? response[randomIndex].image.large.url : fallbackURL
 
-  const imageURL = response ? response[0].image.large.url : fallbackURL
   // Images
   document.getElementById('image1').style.backgroundImage = `url(${imageURL})`
   document.getElementById('image2').style.backgroundImage = `url(${imageURL})`
