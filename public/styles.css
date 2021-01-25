@@ -1,13 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
 body {
   font-size: 12px;
-  font-family: 'Inter', sans-serif;
+  font-family: 'IBM Plex Sans', sans-serif;
   text-transform: uppercase;
 }
 
 a {
   color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid;
 }
 
 .wrapper {
@@ -48,11 +50,17 @@ a {
   border: none;
   border-bottom: 1px solid;
   padding: 3px;
-  width: 260px;
+  min-width: 260px;
 }
 
 label {
+  display: inline-block;
+  width: 140px;
+}
+
+label:hover {
   cursor: pointer;
+  color: #00ffb2;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
