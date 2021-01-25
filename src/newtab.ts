@@ -1,12 +1,18 @@
-let darkMode
+let darkMode: boolean,
+    currentChannel: string;
+const fallbackImage = 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1'
+
 chrome.runtime.sendMessage({ name: "load"}, (response) => {
   darkMode = JSON.parse(response.darkMode)
+  currentChannel = response.currentChannel
   setBg(darkMode)
+  document.getElementById('currentChannel').setAttribute("href", currentChannel)
+  document.getElementById('currentChannel').innerHTML = currentChannel
 })
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   // fallback image
-  const fallbackURL = !contents || contents.length === 0 ? 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1' : ''
+  const fallbackURL = !contents || contents.length === 0 ? fallbackImage : ''
 
   // process response array
   const randomIndex = contents ? Math.floor(Math.random() * contents.length) : 0
@@ -31,7 +37,7 @@ const handleChange = (e: Event) => {
   e.preventDefault()
   const input = document.getElementById('input') as HTMLInputElement
   const value = input.value
-  saveToLocalStorage(value, 'input')
+  saveToLocalStorage(value, 'currentChannel')
   reloadTab()
 }
 

@@ -37,12 +37,24 @@ a {
   margin: 3px 0;
 }
 
+#currentChannel {
+  padding: 3px;
+  text-transform: lowercase;
+}
+
 #input {
   font-size: 12px;
   font-family: 'IBM Plex Mono', sans-serif;
   border: none;
   border-bottom: 1px solid;
-  padding: 5px;
+  padding: 3px;
+  width: 260px;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+  color: #aaa;
+  font-size: 12px;
+  text-transform: lowercase;
 }
 
 #toggle {
@@ -53,11 +65,10 @@ a {
 
 #toggle:hover {
   cursor: pointer;
-  color: #DB00FF;
+  color: #00ffb2;
 }
 
 .credits {
-  width: 100%;
   padding: 5px 0;
   font-size: 10px;
 }

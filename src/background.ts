@@ -1,26 +1,32 @@
+const fallbackChannel = 'https://www.are.na/kalli-retzepi/mais-oui-images'
 
 // listen for messages from newtab.ts
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // handle dark mode
   if (msg.name === "load") {
     const darkMode = getFromLocalStorage('darkMode')
-    response({ darkMode })
+    const currentChannel = getFromLocalStorage('currentChannel') || fallbackChannel
+    response({ darkMode, currentChannel })
   }
 
   if (msg.name === "fetchImage") {
-    // get channel from localStorage, if it exists
-    const channel = getFromLocalStorage('input')
-    // retrieve image from channel using API
-    fetchFromAPI(channel)
-    // send to newtab.ts for display
+    // get channel from localStorage
+    const channel = getFromLocalStorage('currentChannel')
+    const parts = channel.split('/')
+    const slug = parts[parts.length - 1]
+
+    // send back to newtab.ts to display
+    fetchFromAPI(slug)
     .then(response)
+
+    // fixes async/await problems since background.ts is by default synchronous
     return true
   }
 
 })
 
-const fetchFromAPI = async (channel: string) => {
-  const arenaURL = `http://api.are.na/v2/channels/${channel}/`
+const fetchFromAPI = async (slug: string) => {
+  const arenaURL = `http://api.are.na/v2/channels/${slug}/`
   try {
     const lengthResponse = await fetch(arenaURL)
     const { length } = await lengthResponse.json()
@@ -30,7 +36,6 @@ const fetchFromAPI = async (channel: string) => {
 
     const contentResponse  = await fetch(`${arenaURL}/contents?page=${lastPage}&amp;per=${numOfItems}`)
     let { contents } = await contentResponse.json()
-    console.log(contents)
     return contents
 
    } catch (error) {
