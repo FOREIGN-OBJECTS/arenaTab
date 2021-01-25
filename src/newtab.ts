@@ -74,7 +74,7 @@ const setChannel = (currentChannel: string) => {
   }
   else {
     document.getElementById('warning').style.opacity = "1"
-    document.getElementById('warning').innerHTML = 'enter a valid URL'
+    document.getElementById('warning').innerHTML = 'Please enter a valid URL =)'
   }
 }
 

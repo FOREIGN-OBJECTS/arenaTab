@@ -61,9 +61,8 @@ input:focus + span::after{
 
 #warning {
   opacity: 0;
-  font-style: italic;
   font-size: 12px;
-  text-transform: lowercase;
+  text-transform: none;
   margin-left: 10px;
   color: #00ffb2;
 }
