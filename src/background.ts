@@ -4,7 +4,7 @@ const fallbackChannel = 'https://www.are.na/kalli-retzepi/mais-oui-images'
 chrome.runtime.onMessage.addListener((msg, sender, response) => {
   // handle dark mode
   if (msg.name === "load") {
-    const darkMode = getFromLocalStorage('darkMode')
+    const darkMode = getFromLocalStorage('darkMode') || false
     const currentChannel = getFromLocalStorage('currentChannel') || fallbackChannel
     response({ darkMode, currentChannel })
   }
@@ -12,15 +12,21 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
   if (msg.name === "fetchImage") {
     // get channel from localStorage
     const channel = getFromLocalStorage('currentChannel')
-    const parts = channel.split('/')
-    const slug = parts[parts.length - 1]
+    if (channel) {
+      const parts = channel.split('/')
+      const slug = parts[parts.length - 1]
 
-    // send back to newtab.ts to display
-    fetchFromAPI(slug)
-    .then(response)
-
-    // fixes async/await problems since background.ts is by default synchronous
-    return true
+      // send back to newtab.ts to display
+      fetchFromAPI(slug)
+      .then(response)
+      // fixes async/await problems since background.ts is by default synchronous
+      return true
+    }
+    else {
+      response({ darkMode: false, currentChannel: fallbackChannel})
+      // fixes async/await problems since background.ts is by default synchronous
+      return true
+    }
   }
 
 })
