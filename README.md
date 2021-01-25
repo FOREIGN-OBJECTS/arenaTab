@@ -9,5 +9,7 @@ A Chrome plugin that uses imagery from an [are.na](https://www.are.na/) channel 
 * based on [are.na API documentation](https://dev.are.na/documentation/channels)
 * currently only supports public channels 📌
 
+![video](video.gif)
+
 ## Setup
 `npm install` to run locally and `npm run watch` to watch. To build for loading into Chrome, `npm run build` and then load the `dist/` directory via "Load unpacked" on `chrome://extensions/`.
