@@ -31,6 +31,9 @@ chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   document.getElementById('input').addEventListener('change', e => handleChange(e))
   document.getElementById('toggle').addEventListener('click', e => handleToggle(e))
 
+  document.getElementById('currentChannelLabel').addEventListener('click', e=>toggleVisibility(e))
+  document.getElementById('inputLabel').addEventListener('click', e=>toggleVisibility(e))
+
 })
 
 const handleChange = (e: Event) => {
@@ -68,4 +71,13 @@ const handleToggle = (e: Event) => {
   darkMode = !darkMode
   saveToLocalStorage(darkMode.toString(), 'darkMode')
   setBg(darkMode)
+}
+
+const toggleVisibility = (e: Event) => {
+  e.preventDefault()
+  const element = e.target as HTMLElement
+  const id = element.id === 'currentChannelLabel' ? 'currentChannel' : 'input'
+  const input = document.getElementById(id) as HTMLElement
+  const opacity = input.style.opacity;
+  input.style.opacity = opacity === '0' ? '1' : '0';
 }

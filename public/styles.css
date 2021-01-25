@@ -51,6 +51,10 @@ a {
   width: 260px;
 }
 
+label {
+  cursor: pointer;
+}
+
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #aaa;
   font-size: 12px;
