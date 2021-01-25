@@ -1,22 +1,20 @@
-let darkMode: boolean,
-    currentChannel: string;
+let darkMode: boolean
+let currentChannel: string
+const defaultChannel = 'https://www.are.na/kalli-retzepi/mais-oui-images'
 const fallbackImage = 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1'
 
 chrome.runtime.sendMessage({ name: "load"}, (response) => {
-  darkMode = JSON.parse(response.darkMode)
-  currentChannel = response.currentChannel
+  darkMode = response.darkMode ? JSON.parse(response.darkMode) : false
   setBg(darkMode)
-  document.getElementById('currentChannel').setAttribute("href", currentChannel)
-  document.getElementById('currentChannel').innerHTML = currentChannel
+
+  currentChannel = response.currentChannel ? response.currentChannel : defaultChannel
+  setChannel(currentChannel)
 })
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
-  // fallback image
-  const fallbackURL = !contents || contents.length === 0 ? fallbackImage : ''
-
   // process response array
   const randomIndex = contents ? Math.floor(Math.random() * contents.length) : 0
-  const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.large.url : fallbackURL
+  const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.large.url : fallbackImage
 
   // Images
   document.getElementById('image1').style.backgroundImage = `url(${imageURL})`
@@ -65,11 +63,17 @@ const saveToLocalStorage = (value: string, id: string) => {
 const setBg = (darkMode: boolean) => {
   document.bgColor = darkMode ? '#000' : '#fff'
   document.getElementById('settings').style.filter = !darkMode ? 'invert(0)' : 'invert(1)'
+  saveToLocalStorage(darkMode.toString(), 'darkMode')
+}
+
+const setChannel = (currentChannel: string) => {
+  document.getElementById('currentChannel').setAttribute("href", currentChannel)
+  document.getElementById('currentChannel').innerHTML = currentChannel
+  saveToLocalStorage(currentChannel, 'currentChannel')
 }
 
 const handleToggle = (e: Event) => {
   darkMode = !darkMode
-  saveToLocalStorage(darkMode.toString(), 'darkMode')
   setBg(darkMode)
 }
 
