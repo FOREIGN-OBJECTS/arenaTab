@@ -13,7 +13,7 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   // process response array
-  const randomIndex = contents ? Math.floor(Math.random() * contents.length) : 0
+  const randomIndex = contents && contents.length > 0 ? Math.floor(Math.random() * contents.length) : 0
   const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.large.url : fallbackImage
 
   // Images
@@ -67,9 +67,25 @@ const setBg = (darkMode: boolean) => {
 }
 
 const setChannel = (currentChannel: string) => {
-  document.getElementById('currentChannel').setAttribute("href", currentChannel)
-  document.getElementById('currentChannel').innerHTML = currentChannel
-  saveToLocalStorage(currentChannel, 'currentChannel')
+  if (isValidURL(currentChannel)) {
+    document.getElementById('currentChannel').setAttribute("href", currentChannel)
+    document.getElementById('currentChannel').innerHTML = currentChannel
+    saveToLocalStorage(currentChannel, 'currentChannel')
+  }
+  else {
+    document.getElementById('warning').style.opacity = "1"
+    document.getElementById('warning').innerHTML = 'enter a valid URL'
+  }
+}
+
+const isValidURL = (urlToCheck: string) => {
+  let url
+  try {
+    url = new URL(urlToCheck);
+  } catch (_) {
+    return false;
+  }
+  return url.protocol === "http:" || url.protocol === "https:";
 }
 
 const handleToggle = (e: Event) => {
