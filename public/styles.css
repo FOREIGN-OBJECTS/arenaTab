@@ -35,9 +35,12 @@ a {
 .image {
   width: 15vw;
   height: 75vh;
+}
+
+#image2 {
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('loading.png')
+  background-image: url('loading.gif')
 }
 
 #settings {
