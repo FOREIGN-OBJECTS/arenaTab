@@ -1,6 +1,7 @@
 {
   "manifest_version": 2,
-  "name": "are.na new tab",
+  "name": "arenaTab",
+  "author": "Kalli Retzepi",
   "description": "Opens a new tab using an are.na image",
   "version": "1.0",
   "chrome_url_overrides" : {

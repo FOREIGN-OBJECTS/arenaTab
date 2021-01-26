@@ -13,16 +13,29 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
 })
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
+  // if response is still pending
+  if (!contents) {
+    setImages('loading.png')
+  }
+
   // process response array
   const randomIndex = contents && contents.length > 0 ? Math.floor(Math.random() * contents.length) : 0
 
+  // watch for data glitches in the array
   if (!contents[randomIndex].image.large.url) {
+    setImages('loading.png')
     setWarning('Something went wrong with loading this image, will reload.')
     reloadTab()
   }
+
+  // extract imageURL
   const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.large.url : fallbackImage
 
-  // Images
+  setImages(imageURL)
+  setUX()
+})
+
+const setImages = (imageURL: string) => {
   document.getElementById('image1').style.backgroundImage = `url(${imageURL})`
 
   document.getElementById('image2').style.backgroundImage = `url(${imageURL})`
@@ -30,15 +43,15 @@ chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
 
   document.getElementById('image3').style.backgroundImage = `url(${imageURL})`
   document.getElementById('image3').style.backgroundPosition = '25% 75%'
+}
 
-  // UX
+const setUX = () => {
   document.getElementById('input').addEventListener('change', e => handleChange(e))
   document.getElementById('toggle').addEventListener('click', e => handleToggle(e))
 
   document.getElementById('currentChannelLabel').addEventListener('click', e=>toggleVisibility(e))
   document.getElementById('inputLabel').addEventListener('click', e=>toggleVisibility(e))
-
-})
+}
 
 const handleChange = (e: Event) => {
   e.preventDefault()

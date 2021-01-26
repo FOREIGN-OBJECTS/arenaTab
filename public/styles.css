@@ -29,6 +29,7 @@ a {
   width: 60vw;
   padding-top: 6vh;
   margin: 0 auto;
+  z-index: 1;
 }
 
 .image {
@@ -36,6 +37,7 @@ a {
   height: 75vh;
   background-repeat: no-repeat;
   background-position: center;
+  background-image: url('loading.png')
 }
 
 #settings {

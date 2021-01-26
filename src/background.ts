@@ -22,8 +22,7 @@ chrome.runtime.onMessage.addListener((msg, sender, response) => {
     }
 
     // send back to newtab.ts to display
-    fetchFromAPI(slug)
-    .then(response)
+    fetchFromAPI(slug).then(response)
     // fixes async/await problems since background.ts is by default synchronous
     return true
   }
