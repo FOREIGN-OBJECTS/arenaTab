@@ -1,13 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
 
+html {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-size: 12px;
   font-family: 'IBM Plex Sans', sans-serif;
   text-transform: uppercase;
+  margin: 0;
+  padding: 0;
 }
 
 a {
   color: inherit;
+}
+
+#arenaTab {
+  width: 100vw;
+  height: 100vh;
 }
 
 .wrapper {
@@ -15,7 +27,8 @@ a {
   flex-direction: row;
   justify-content: space-between;
   width: 60vw;
-  margin: 6vh auto;
+  padding-top: 6vh;
+  margin: 0 auto;
 }
 
 .image {
@@ -27,6 +40,7 @@ a {
 
 #settings {
   width: 85vw;
+  padding-top: 6vh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;

@@ -61,7 +61,7 @@ const saveToLocalStorage = (value: string, id: string) => {
 }
 
 const setBg = (darkMode: boolean) => {
-  document.bgColor = darkMode ? '#000' : '#fff'
+  document.getElementById('arenaTab').style.backgroundColor = darkMode ? '#000' : '#fff'
   document.getElementById('settings').style.filter = !darkMode ? 'invert(0)' : 'invert(1)'
   saveToLocalStorage(darkMode.toString(), 'darkMode')
 }
