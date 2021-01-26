@@ -15,7 +15,7 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   // if response is still pending
   if (!contents) {
-    setImages('loading.png')
+    setImages(fallbackImage)
   }
 
   // process response array
@@ -23,7 +23,7 @@ chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
 
   // watch for data glitches in the array
   if (!contents[randomIndex].image.large.url) {
-    setImages('loading.png')
+    setImages(fallbackImage)
     setWarning('Something went wrong with loading this image, will reload.')
     reloadTab()
   }
