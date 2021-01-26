@@ -40,7 +40,7 @@ a {
 }
 
 .animation {
-  animation: rotate 1s;
+  animation: rotate 3s;
   background-image: url('loading.svg');
 }
 
