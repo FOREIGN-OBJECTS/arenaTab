@@ -86,7 +86,7 @@ input:focus {
   font-size: 12px;
   text-transform: none;
   margin-left: 10px;
-  color: #00ffb2;
+  color: #3bd3b2;
 }
 
 label {
@@ -95,7 +95,7 @@ label {
 }
 
 label:hover {
-  color: #00ffb2;
+  color: #3bd3b2;
 }
 
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
@@ -112,7 +112,7 @@ label:hover {
 
 #toggle:hover {
   cursor: pointer;
-  color: #00ffb2;
+  color: #3bd3b2;
 }
 
 .credits {
