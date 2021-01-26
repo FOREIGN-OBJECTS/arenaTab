@@ -1,6 +1,6 @@
 let darkMode: boolean
 let currentChannel: string
-const defaultChannel = 'https://www.are.na/kalli-retzepi/mais-oui-images'
+const defaultChannel = 'https://www.are.na/tobias-koch/accidental-renaissance'
 const fallbackImage = 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1'
 
 chrome.runtime.sendMessage({ name: "load"}, (response) => {
@@ -9,11 +9,17 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
 
   currentChannel = response.currentChannel ? response.currentChannel : defaultChannel
   setChannel(currentChannel)
+
 })
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
   // process response array
   const randomIndex = contents && contents.length > 0 ? Math.floor(Math.random() * contents.length) : 0
+
+  if (!contents[randomIndex].image.large.url) {
+    setWarning('Something went wrong with loading this image, will reload.')
+    reloadTab()
+  }
   const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.large.url : fallbackImage
 
   // Images
@@ -73,9 +79,13 @@ const setChannel = (currentChannel: string) => {
     saveToLocalStorage(currentChannel, 'currentChannel')
   }
   else {
-    document.getElementById('warning').style.opacity = "1"
-    document.getElementById('warning').innerHTML = 'Please enter a valid URL =)'
+    setWarning('Please enter a valid URL =)')
   }
+}
+
+const setWarning = (message: string) => {
+  document.getElementById('warning').style.opacity = "1"
+  document.getElementById('warning').innerHTML = message
 }
 
 const isValidURL = (urlToCheck: string) => {
