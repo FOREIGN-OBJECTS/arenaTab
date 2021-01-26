@@ -40,7 +40,8 @@ const fetchFromAPI = async (slug: string) => {
 
     const contentResponse  = await fetch(`${arenaURL}/contents?page=${lastPage}&amp;per=${numOfItems}`)
     let { contents } = await contentResponse.json()
-    return contents
+    const randomIndex = contents && contents.length > 0 ? Math.floor(Math.random() * contents.length) : 0
+    return contents[randomIndex]
 
    } catch (error) {
      console.log(error);
@@ -50,7 +51,6 @@ const fetchFromAPI = async (slug: string) => {
 const getFromLocalStorage = (id: string) => {
   try {
     const value = localStorage.getItem(id)
-    console.log(`retrieved ${id}:${value}`)
     return JSON.parse(value)
   } catch(e) {
     console.log('failed getting', e)

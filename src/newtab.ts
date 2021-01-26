@@ -9,35 +9,30 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
 
   currentChannel = response.currentChannel ? response.currentChannel : defaultChannel
   setChannel(currentChannel)
-
+  setWarning('')
 })
 
-chrome.runtime.sendMessage({ name: "fetchImage" }, (contents) => {
+chrome.runtime.sendMessage({ name: "fetchImage" }, (response) => {
   // if response is still pending
-  if (!contents) {
+  if (!response) {
     setImages(fallbackImage)
   }
-
-  // process response array
-  const randomIndex = contents && contents.length > 0 ? Math.floor(Math.random() * contents.length) : 0
 
   // watch for data glitches in the array
-  if (!contents[randomIndex].image.large.url) {
+  if ( !response || (response.length === 0) || !response.image.large.url) {
     setImages(fallbackImage)
-    setWarning('Something went wrong with loading this image, will reload.')
-    reloadTab()
+    setWarning('Something went wrong with loading this channel, mind verifying the URL?')
+  } else {
+    setImages(response.image.large.url)
   }
-
-  // extract imageURL
-  const imageURL = contents && contents.length > 0 ? contents[randomIndex].image.large.url : fallbackImage
-
-  setImages(imageURL)
-  setUX()
+    setUX()
 })
 
 const setImages = (imageURL: string) => {
+
   document.getElementById('image1').style.backgroundImage = `url(${imageURL})`
 
+  document.getElementById("image2").classList.remove("animation")
   document.getElementById('image2').style.backgroundImage = `url(${imageURL})`
   document.getElementById('image2').style.backgroundPosition= '75% 25%'
 
@@ -48,9 +43,6 @@ const setImages = (imageURL: string) => {
 const setUX = () => {
   document.getElementById('input').addEventListener('change', e => handleChange(e))
   document.getElementById('toggle').addEventListener('click', e => handleToggle(e))
-
-  document.getElementById('currentChannelLabel').addEventListener('click', e=>toggleVisibility(e))
-  document.getElementById('inputLabel').addEventListener('click', e=>toggleVisibility(e))
 }
 
 const handleChange = (e: Event) => {
@@ -64,7 +56,6 @@ const handleChange = (e: Event) => {
 const reloadTab = () => {
   chrome.tabs.query({active: true, currentWindow: true}, tabs => {
     chrome.tabs.reload(tabs[0].id)
-    console.log('reload')
   })
 }
 
@@ -72,7 +63,6 @@ const saveToLocalStorage = (value: string, id: string) => {
   try {
     const valueStr = JSON.stringify(value)
     localStorage.setItem(id, valueStr)
-    console.log(`saved ${id}:${value}`)
   }
   catch(e) {
     console.log('failed saving', e)
@@ -114,13 +104,4 @@ const isValidURL = (urlToCheck: string) => {
 const handleToggle = (e: Event) => {
   darkMode = !darkMode
   setBg(darkMode)
-}
-
-const toggleVisibility = (e: Event) => {
-  e.preventDefault()
-  const element = e.target as HTMLElement
-  const id = element.id === 'currentChannelLabel' ? 'currentChannel' : 'input'
-  const input = document.getElementById(id) as HTMLElement
-  const opacity = input.style.opacity;
-  input.style.opacity = opacity === '0' ? '1' : '0';
 }

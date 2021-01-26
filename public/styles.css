@@ -35,12 +35,18 @@ a {
 .image {
   width: 15vw;
   height: 75vh;
-}
-
-#image2 {
   background-repeat: no-repeat;
   background-position: center;
-  background-image: url('loading.gif')
+}
+
+.animation {
+  animation: rotate 1s;
+  background-image: url('loading.svg');
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg) }
+  to { transform: rotate(360deg)}
 }
 
 #settings {
@@ -74,9 +80,6 @@ a {
 input:focus {
   outline: none !important;
 }
-input:focus + span::after{
-  content: "←";
-}
 
 #warning {
   opacity: 0;
@@ -92,7 +95,6 @@ label {
 }
 
 label:hover {
-  cursor: pointer;
   color: #00ffb2;
 }
 
