@@ -1,6 +1,6 @@
 let darkMode: boolean
 let currentChannel: string
-const defaultChannel = 'https://www.are.na/tobias-koch/accidental-renaissance'
+const defaultChannel = 'https://www.are.na/kalli-retzepi/mais-oui-images'
 const fallbackImage = 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1'
 
 chrome.runtime.sendMessage({ name: "load"}, (response) => {

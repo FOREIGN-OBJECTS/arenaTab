@@ -5,7 +5,7 @@ A Chrome plugin that uses imagery from an [are.na](https://www.are.na/) channel 
 
 ## Features (beta)
 * dark mode 🌝🌚
-* ability to change channel
+* ability to change channel - I suggest this one: https://www.are.na/tobias-koch/accidental-renaissance 
 * persists channel name and dark mode between sessions
 * based on [are.na API documentation](https://dev.are.na/documentation/channels)
 * forked from [this repo](https://github.com/chibat/chrome-extension-typescript-starter)
