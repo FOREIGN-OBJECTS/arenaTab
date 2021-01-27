@@ -9,7 +9,10 @@ A Chrome plugin that uses imagery from an [are.na](https://www.are.na/) channel 
 * persists channel name and dark mode between sessions
 * based on [are.na API documentation](https://dev.are.na/documentation/channels)
 * forked from [this repo](https://github.com/chibat/chrome-extension-typescript-starter)
+
+## Limitations - currently WIP
 * currently only supports public channels 📌
+* each API request returns 25 items, of which one is randomly displayed.
 
 ![video](export.gif)
 
