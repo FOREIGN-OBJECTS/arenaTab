@@ -40,8 +40,8 @@ const fetchFromAPI = async (slug: string) => {
 
     const contentResponse  = await fetch(`${arenaURL}/contents?page=${lastPage}&amp;per=${numOfItems}`)
     let { contents } = await contentResponse.json()
-    const randomIndex = contents && contents.length > 0 ? Math.floor(Math.random() * contents.length) : 0
-    return contents[randomIndex]
+    const randomElement = contents[(Math.random() * contents.length) | 0]
+    return randomElement
 
    } catch (error) {
      console.log(error);
