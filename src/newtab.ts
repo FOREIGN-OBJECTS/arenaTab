@@ -10,6 +10,9 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
   currentChannel = response.currentChannel ? response.currentChannel : defaultChannel
   setChannel(currentChannel)
   setWarning('')
+
+  const index = response.index ? JSON.parse(response.index) : 0
+  saveToLocalStorage(index.toString(), 'index')
 })
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (response) => {
