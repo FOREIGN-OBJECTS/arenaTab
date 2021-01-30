@@ -43,7 +43,7 @@ const fetchFromAPI = async (slug: string) => {
     const randomElement = contents[(Math.random() * contents.length) | 0]
     return randomElement
 
-   } catch (error) {
+   } catch(error) {
      console.log(error);
    }
 }
