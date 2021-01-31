@@ -25,6 +25,8 @@ chrome.runtime.sendMessage({ name: "fetchImage" }, (response) => {
   if ( !response || !response.image.large.url) {
     setImages(fallbackImage)
     if (index!==1) setWarning('Something went wrong - try refreshing or checking your URL?')
+    setChannel(defaultChannel)
+
   } else {
     setImages(response.image.large.url)
   }
