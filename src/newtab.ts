@@ -2,8 +2,12 @@ let darkMode: boolean
 let currentChannel: string
 const defaultChannel = 'https://www.are.na/kalli-retzepi/mais-oui-images'
 const fallbackImage = 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1'
+const isTabEmpty = window.location.pathname === '/newtab.html'
+let index
 
 chrome.runtime.sendMessage({ name: "load"}, (response) => {
+  saveToLocalStorage(defaultChannel, 'currentChannel')
+
   darkMode = response.darkMode ? JSON.parse(response.darkMode) : false
   setBg(darkMode)
 
@@ -11,20 +15,16 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
   setChannel(currentChannel)
   setWarning('')
 
-  const index = response.index ? JSON.parse(response.index) : 0
+  index = response.index ? JSON.parse(response.index) : 0
   saveToLocalStorage(index.toString(), 'index')
 })
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (response) => {
-  // if response is still pending
-  if (!response) {
-    setImages(fallbackImage)
-  }
-
+  console.log(index)
   // watch for data glitches in the array
-  if ( !response || (response.length === 0) || !response.image.large.url) {
+  if ( !response || !response.image.large.url) {
     setImages(fallbackImage)
-    setWarning('Something went wrong with loading this channel, mind verifying the URL?')
+    if (index!==1) setWarning('Something went wrong - try refreshing or checking your URL?')
   } else {
     setImages(response.image.large.url)
   }
@@ -32,12 +32,7 @@ chrome.runtime.sendMessage({ name: "fetchImage" }, (response) => {
 })
 
 const setImages = (imageURL: string) => {
-  if (!document.getElementById('image1') ||
-      !document.getElementById('image2') ||
-      !document.getElementById('image3')
-    ) {
-    return null
-  }
+  if (!isTabEmpty) return null
 
   document.getElementById('image1').style.backgroundImage = `url(${imageURL})`
 
@@ -50,7 +45,7 @@ const setImages = (imageURL: string) => {
 }
 
 const setUX = () => {
-  if (!document.getElementById('input') || !document.getElementById('toggle')) return null
+  if (!isTabEmpty) return null
 
   document.getElementById('input').addEventListener('change', e => handleChange(e))
   document.getElementById('toggle').addEventListener('click', e => handleToggle(e))
@@ -81,7 +76,7 @@ const saveToLocalStorage = (value: string, id: string) => {
 }
 
 const setBg = (darkMode: boolean) => {
-  if (!document.getElementById('arenaTab') || !document.getElementById('settings')) return null
+  if (!isTabEmpty) return null
 
   document.getElementById('arenaTab').style.backgroundColor = darkMode ? '#000' : '#fff'
   document.getElementById('settings').style.filter = !darkMode ? 'invert(0)' : 'invert(1)'
@@ -89,7 +84,7 @@ const setBg = (darkMode: boolean) => {
 }
 
 const setChannel = (currentChannel: string) => {
-  if (!document.getElementById('currentChannel')) return null
+  if (!isTabEmpty) return null
 
   if (isValidURL(currentChannel)) {
     document.getElementById('currentChannel').setAttribute("href", currentChannel)
@@ -102,7 +97,7 @@ const setChannel = (currentChannel: string) => {
 }
 
 const setWarning = (message: string) => {
-  if (!document.getElementById('warning')) return null
+  if (!isTabEmpty) return null
 
   document.getElementById('warning').style.opacity = "1"
   document.getElementById('warning').innerHTML = message
