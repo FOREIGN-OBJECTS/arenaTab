@@ -2,8 +2,9 @@
   "manifest_version": 2,
   "name": "arenaTab",
   "author": "Kalli Retzepi",
-  "description": "Opens a new tab using an are.na image",
-  "version": "1.0",
+  "description": "Transform a new tab into an are.na channel gallery. A FOREIGN OBJECTS side project.",
+  "version": "1.1",
+  "homepage_url": "https://github.com/Kallirroi/arenaTab",
   "chrome_url_overrides" : {
     "newtab": "newtab.html"
   },
