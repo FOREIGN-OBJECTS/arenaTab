@@ -3,8 +3,8 @@
   "name": "arenaTab",
   "author": "Kalli Retzepi",
   "description": "Transform a new tab into an are.na channel gallery. A FOREIGN OBJECTS side project.",
-  "version": "1.1",
-  "homepage_url": "https://github.com/Kallirroi/arenaTab",
+  "version": "1.2",
+  "homepage_url": "https://github.com/FOREIGN-OBJECTS/arenaTab",
   "chrome_url_overrides" : {
     "newtab": "newtab.html"
   },
@@ -21,7 +21,6 @@
     "scripts": ["js/background.js"]
   },
   "permissions": [
-    "storage",
     "<all_urls>"
   ]
 }
