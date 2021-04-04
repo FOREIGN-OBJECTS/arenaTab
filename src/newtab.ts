@@ -20,7 +20,6 @@ chrome.runtime.sendMessage({ name: "load"}, (response) => {
 })
 
 chrome.runtime.sendMessage({ name: "fetchImage" }, (response) => {
-  console.log(index)
   // watch for data glitches in the array
   if ( !response || !response.image.large.url) {
     setImages(fallbackImage)
