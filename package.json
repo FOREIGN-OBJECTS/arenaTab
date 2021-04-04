@@ -1,6 +1,6 @@
 {
   "name": "arenaTab",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A Chrome plugin that uses imagery from an https://www.are.na/ channel in a new tab.",
   "main": "index.js",
   "scripts": {
