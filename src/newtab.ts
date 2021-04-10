@@ -1,11 +1,11 @@
 let darkMode: boolean
 let currentChannel: string
 const defaultChannel = 'https://www.are.na/kalli-retzepi/mais-oui-images'
-const fallbackImage = 'https://d2w9rnfcy7mm78.cloudfront.net/1554784/original_0391fc0146953aa05ce6b2a20322a41a.jpg?1515018840?bc=1'
+const fallbackImage = 'https://d2w9rnfcy7mm78.cloudfront.net/5202305/original_16e2bf26d28754ae62d7d0d0a00c74fe.jpg?1570562601?bc=0'
 const isTabEmpty = window.location.pathname === '/newtab.html'
 let index
 
-chrome.runtime.sendMessage({ name: "load"}, (response) => {
+chrome.runtime.sendMessage({ name: "load" }, (response) => {
   saveToLocalStorage(defaultChannel, 'currentChannel')
 
   darkMode = response.darkMode ? JSON.parse(response.darkMode) : false
