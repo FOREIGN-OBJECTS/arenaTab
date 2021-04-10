@@ -17,9 +17,12 @@
     "url": "https://github.com/FOREIGN-OBJECTS/arenaTab"
   },
   "dependencies": {
+    "elliptic": "^6.5.4",
     "jquery": "^3.5.0",
     "moment": "~2.24.0",
-    "nan": "^2.14.2"
+    "nan": "^2.14.2",
+    "ssri": "^8.0.1",
+    "y18n": "^5.0.8"
   },
   "devDependencies": {
     "@types/chrome": "0.0.100",
