@@ -50,7 +50,7 @@ const fetchFromAPI = async (slug: string, index: number) => {
 
     const lastPage = Math.floor(length / 25) // every page has 25 items
     const numOfItems = 25
-    const fetchedPage = lastPage - 3
+    const fetchedPage = lastPage
 
     const contentResponse = await fetch(`${arenaURL}/contents?page=${fetchedPage}&amp;per=${numOfItems}`)
     let { contents } = await contentResponse.json()
